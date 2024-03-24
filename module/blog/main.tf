@@ -67,13 +67,13 @@ module "blog_alb" {
     }
   ]
 
-  http_tcp_listeners = [
-    {
-      port               = 80
-      protocol           = "HTTP"
+  listeners = {
+    ex-http = {
+      port     = 80
       target_group_index = 0
+      protocol = "HTTP"
     }
-  ]
+  }
 
   tags = {
     Environment = var.environment.name
