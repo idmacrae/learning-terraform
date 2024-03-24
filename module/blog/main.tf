@@ -31,7 +31,7 @@ module "blog_vpc" {
 
 module "blog_autoscaling" {
   source  = "terraform-aws-modules/autoscaling/aws"
-  version = "7.4.1"
+  version = "6.5.2"
 
   name = "${var.environment.name}-blog"
 
@@ -48,7 +48,7 @@ module "blog_autoscaling" {
 
 module "blog_alb" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "9.8.0"
+  version = "~> 6.0"
 
   name = "${var.environment.name}-blog-alb"
 
@@ -67,13 +67,13 @@ module "blog_alb" {
     }
   ]
 
-  listeners = {
-    ex-http = {
-      port     = 80
+  http_tcp_listeners = [
+    {
+      port               = 80
+      protocol           = "HTTP"
       target_group_index = 0
-      protocol = "HTTP"
     }
-  }
+  ]
 
   tags = {
     Environment = var.environment.name
