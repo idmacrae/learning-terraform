@@ -39,7 +39,7 @@ module "blog_autoscaling" {
   max_size            = var.asg_max_size
 
   vpc_zone_identifier = module.blog_vpc.public_subnets
-  target_group_arns   = module.blog_alb.target_group[0].arn
+  target_group_arns   = module.blog_alb.target_groups[0].arn
   security_groups     = [module.blog_sg.security_group_id]
 
   instance_type       = var.instance_type
